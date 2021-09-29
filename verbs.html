@@ -1,0 +1,56 @@
+<html>
+<head>
+    <title>Vice Verba</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width"/>
+    <link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+    <img src="assets/correct.png" style="display: none;" id="correct"/>
+    <img src="assets/incorrect.png" style="display: none;" id="incorrect"/>
+    <h1 id="verb">emo</h1>
+    <h2>person</h2>
+    <div class="grammar" id="person">
+        <input type="radio" id="first" name="person" value="first"/>
+        <label for="first">first</label>
+        <input type="radio" id="second" name="person" value="second"/>
+        <label for="second">second</label>
+        <input type="radio" id="third" name="person" value="third"/>
+        <label for="third">third</label>
+    </div>
+    <h2>number</h2>
+    <div class="grammar" id="number">
+        <input type="radio" id="singular" name="number" value="singular"/>
+        <label for="singular">singular</label>
+        <input type="radio" id="plural" name="number" value="plural"/>
+        <label for="plural">plural</label>
+    </div>
+    <h2>tense</h2>
+    <div class="grammar" id="tense">
+        <input type="radio" id="present" name="tense" value="present"/>
+        <label for="present">present</label>
+        <input type="radio" id="future" name="tense" value="future"/>
+        <label for="future">future</label>
+        <input type="radio" id="perfect" name="tense" value="perfect"/>
+        <label for="perfect">perfect</label>
+    </div>
+    <h2>voice</h2>
+    <div class="grammar" id="voice">
+        <input type="radio" id="active" name="voice" value="active"/>
+        <label for="active">active</label>
+        <input type="radio" id="passive" name="voice" value="passive"/>
+        <label for="passive">passive</label>
+    </div>
+    <h2>mood</h2>
+    <div class="grammar" id="mood">
+        <input type="radio" id="indicative" name="mood" value="indicative"/>
+        <label for="indicative">indicative</label>
+        <input type="radio" id="subjunctive" name="mood" value="subjunctive"/>
+        <label for="subjunctive">subjunctive</label>
+        <input type="radio" id="imperative" name="mood" value="imperative"/>
+        <label for="imperative">imperative</label>
+    </div>
+    <br>
+    <input type="button" value="check"/>
+</body>
+</html>

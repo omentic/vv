@@ -1,0 +1,107 @@
+body {
+    font-family: serif;
+    /* font-size: 20px; */
+    background-color: beige;
+    color: maroon;
+
+    margin: auto auto;  /* centres the body */
+    max-width: 40em;    /* centres the body */
+    padding: 0 1em;     /* add left/right padding for small screens */
+
+    /* display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: repeat(6, 1fr); */
+    display: flex; /* potential problem: early cutoff on small screens */
+    flex-direction: column;
+}
+
+.links {
+    text-align: center;
+    width: 8em;
+    height: 2em;
+    margin: auto auto;
+    background-color: maroon;
+    color: #ddd;
+    border: 2px solid #ddd;
+    text-decoration: none;
+}
+
+#correct {
+    position: absolute;
+    top: 10em;
+    right: 0em;
+    /* right: 22.5em; */
+}
+
+#incorrect {
+    position: absolute;
+    top: 15em;
+    left: 0em;
+}
+
+.grammar {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    grid-template-rows: 1fr;
+    grid-gap: 1em 1em;
+    align-items: center;
+}
+
+#person label, #tense label, #mood label, #gender label, #case label, #vocab label, #cases label, #tenses label {
+    grid-column-start: span 2;
+}
+
+#number label, #voice label {
+    grid-column-start: span 3;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    /* text-transform: capitalize; */
+}
+
+label {
+    background-color: #ddd;
+    padding: 1em 2em;
+    border: 2px solid maroon;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+    /* text-transform: capitalize; */
+}
+
+input[type="checkbox"], input[type="radio"] {
+    display: none;
+}
+
+input[type="checkbox"]:checked + label, input[type="radio"]:checked + label/*, input[type="radio"]:active + label*/{
+    background-color: maroon;
+    color: #ddd;
+    border: 2px solid #ddd;
+}
+
+input[type="button"] {
+    background-color: #ddd;
+    color: maroon;
+    font-size: 1em;
+    margin-top: 1em;
+    padding: 1em 2em;
+    border: 2px solid maroon;
+    border-radius: 4px;
+    text-transform: uppercase;
+}
+
+input[type="button"]:active {
+    background-color: maroon;
+    color: #ddd;
+    border: 2px solid #ddd;
+}
+
+@media screen and (max-width: 500px) {
+    body {
+        font-size: 12px;
+    }
+}
