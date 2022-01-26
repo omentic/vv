@@ -1,68 +1,18 @@
 "use strict";
 
-// In the future, this will be split by chapter.
-// loading JSON from a file is apparently a non-trivial task. XMLHttpRequest? holy shit
-let verbs = [
-    {
-        "verb": "curro",
-        "person": "first",
-        "number": "singular",
-        "tense": "present",
-        "voice": "active",
-        "mood": "indicative"
-    },
-    {
-        "verb": "curris",
-        "person": "second",
-        "number": "singular",
-        "tense": "present",
-        "voice": "active",
-        "mood": "indicative"
-    },
-    {
-        "verb": "currit",
-        "person": "third",
-        "number": "singular",
-        "tense": "present",
-        "voice": "active",
-        "mood": "indicative"
-    },
-    {
-        "verb": "currimus",
-        "person": "first",
-        "number": "plural",
-        "tense": "present",
-        "voice": "active",
-        "mood": "indicative"
-    },
-    {
-        "verb": "curritis",
-        "person": "second",
-        "number": "plural",
-        "tense": "present",
-        "voice": "active",
-        "mood": "indicative"
-    },
-    {
-        "verb": "currunt",
-        "person": "third",
-        "number": "plural",
-        "tense": "present",
-        "voice": "active",
-        "mood": "indicative"
-    }
-];
+import {verbs} from "./verbs-list.js";
 
+let counter = 0;
 document.addEventListener("load", reset());
 
 // Runs on load and after flashing solution
 function reset() {
     // Get a random question
-    let current = verbs[Math.floor(Math.random() * verbs.length)]; // Yeah, so, this is the best way to pick a random integer...
+    let current = verbs[Math.floor(Math.random() * verbs.length)]; // This is the best way to pick a random integer...
 
     // Reset and repopulate the form
     let inputs = document.querySelectorAll("input[type=radio]");
-    inputs.forEach(item => {item.checked = false}); // Delicious. Finally, some good fucking code.
+    inputs.forEach(item => { item.checked = false; });
     document.getElementById("verb").innerHTML = current.verb;
 
     // Wait until button is submitted
@@ -71,12 +21,9 @@ function reset() {
 }
 
 function check() {
-    console.log("running check");
-
-    // I miss every other language.
     // There's got to be a better way to do this...
     let current = {"null":"null"}
-    verbs.forEach(verb => {if (verb["verb"] == document.getElementById("verb").textContent) current = verb;});
+    verbs.forEach(verb => { if (verb["verb"] == document.getElementById("verb").textContent) current = verb; });
     console.log(current);
 
     // A terrible hack to catch null values.
@@ -87,7 +34,7 @@ function check() {
     || document.querySelector("input[name='voice']:checked") === null
     || document.querySelector("input[name='mood']:checked") === null)) {
         answers = {
-            // Transform submission into a JSON structure for "easy" comparison // oh, if only i knew
+            // Transform submission into a JSON structure for "easy" comparison
             "verb": document.getElementById("verb").textContent,
             "person": document.querySelector("input[name='person']:checked").value,
             "number": document.querySelector("input[name='number']:checked").value,
@@ -97,21 +44,29 @@ function check() {
         };
     }
 
-    // Check if the answers are right and flash the thumbs up / down symbol
-    // (if the constructed JSON structure matches the original)
     console.log(current);
     console.log(answers);
-    if (JSON.stringify(current) === JSON.stringify(answers)) { // So, apparently, neither == or === checks for object equality
+
+    // Check if the answers are right and flash the thumbs up / down symbol
+    // (if the constructed JSON structure matches the original)
+    if (JSON.stringify(current) === JSON.stringify(answers)) { // So, neither == or === checks for object equality
         console.log("correct");
-        // Consider flashing the background green / red too
+        counter += 1;
         document.getElementById("correct").style.display = "block";
-        setTimeout(function() { document.getElementById("correct").style.display = "none"; }, 1000);
+        document.body.style.backgroundColor = "#B5E9AB";
+        setTimeout(function() { document.getElementById("correct").style.display = "none"; document.body.style.backgroundColor = "beige"; }, 1000);
     }
     else {
         console.log("incorrect");
+        counter = 0;
         document.getElementById("incorrect").style.display = "block";
-        // It took me around an hour to find out I had to wrap my function in function(){}
-        setTimeout(function() { document.getElementById("incorrect").style.display = "none"; }, 1000);
+        document.body.style.backgroundColor = "#F3B1B3";
+        setTimeout(function() { document.getElementById("incorrect").style.display = "none"; document.body.style.backgroundColor = "beige"; }, 1000);
+    }
+
+    if (counter >= 20) {
+        document.body.style.backgroundImage = "url(https://i.guim.co.uk/img/static/sys-images/Guardian/Pix/pictures/2012/8/22/1345642863334/pilate-film-008.jpg?width=620&quality=85&auto=format&fit=max&s=e283a7fd64787fee400c20ce7983d4b9)";
+        document.body.style.backgroundSize = "cover";
     }
 
     reset();
